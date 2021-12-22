@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Contact.qml</file>
+        <file>ContactsList.qml</file>
+        <file>pics/cat.jpg</file>
+        <file>pics/cat.png</file>
+        <file>ContactIcon.qml</file>
+        <file>ContactsGrid.qml</file>
+    </qresource>
+</RCC>
