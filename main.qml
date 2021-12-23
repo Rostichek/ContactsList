@@ -6,8 +6,8 @@ import QtQuick.Layouts 1.15
 ApplicationWindow {
     id: root
 
-    width: 600
-    height: 200
+    width: 400
+    height: 600
     visible: true
     title: qsTr("Contact List Viwer")
 

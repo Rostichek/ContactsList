@@ -14,14 +14,16 @@ GridView {
     model: ContactsModel
 
     onIsOnlyFavoritesChanged: {
-        foo()
+        ContactsModel.switchOnlyFavoritesMode()
     }
 
     delegate: Item {
         id: delegateItem
 
-        width: cellWidth
-        height: cellHeight
+        visible: showOnScreen
+
+        width: visible ? cellWidth : 0
+        height: visible ? cellHeight : 0
 
         Contact {
             representation: 1

@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <contactsviwer.h>
+#include <contactsmodel.h>
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
-    qmlRegisterSingletonType<ContactsViwer>("Contacts", 1, 0, "ContactsModel", singletonProvider);
+    qmlRegisterSingletonType<ContactsModel>("Contacts", 1, 0, "ContactsModel", singletonProvider);
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

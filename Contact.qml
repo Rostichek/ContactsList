@@ -8,13 +8,6 @@ Rectangle {
 
     signal called
 
-    radius: 10
-
-    border {
-        width: 2
-        color: "black"
-    }
-
     MouseArea {
         anchors.fill: parent
         onClicked: {
@@ -26,17 +19,19 @@ Rectangle {
         width: 50
         height: 50
 
+        anchors.right: parent.right
+
         Text {
             anchors.centerIn: parent
 
-            text: "+"
+            text:  contactIsFavorite ? "-" : "+";
             font.pointSize: 20
         }
 
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                favorite = true;
+                contactIsFavorite = !contactIsFavorite;
             }
         }
     }

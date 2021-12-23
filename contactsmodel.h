@@ -1,26 +1,32 @@
 #pragma once
 #include <QAbstractListModel>
+#include <QAbstractItemModel>
 #include <QQmlEngine>
 #include <QJSEngine>
 #include <vector>
 #include <string>
+#include <string_view>
+#include "contactlistprovider.h"
 
-class ContactsViwer : public QAbstractListModel
+class ContactsModel : public QAbstractListModel
 {
+    Q_OBJECT
     Q_ENUMS(Roles)
 public:
     enum Roles {
-            CallRole = Qt::UserRole + 1,
-            FavoriteRole,
-            FavoriteViewRole,
-        };
+        CallInProgressRole = Qt::UserRole + 1,
+        ContactIsFavoriteRole,
+        ShowOnScreenRole,
+    };
 
-    ContactsViwer(QObject *parent = nullptr);
-
-    struct Contact {
-        std::string name;
+    struct ContactProperties {
+        size_t id;
+        std::shared_ptr<std::string> name;
         bool is_favorite = false;
     };
+
+
+    ContactsModel(const ContactListProvider& provider, QObject *parent = nullptr);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const override;
     QVariant data(const QModelIndex & index, int role) const override;
@@ -29,30 +35,20 @@ public:
 
     QHash<int,QByteArray> roleNames() const override;
 
-    Q_INVOKABLE void foo();
+    Q_INVOKABLE void switchOnlyFavoritesMode();
 
 private:
-    std::vector<Contact> contacts = {
-        {"Kevin Green"},
-        {"John Bob"},
-        {"John Bob"},
-        {"John Bob"},
-        {"John Bob"},
-        {"John Bob"},
-        {"John Bob"},
-        {"John Bob"},
-        {"Kevin Green"},
-        {"Kevin Green"},
-        {"Kevin Green"},
-        {"Kevin Green"},
-        {"John Bob"},
-        {"John Bob"},};
+    const ContactListProvider& provider;
+
+    std::vector<ContactProperties> contacts;
 
     std::vector<size_t> favorites;
 
     bool onlyFavorite = false;
 
     QModelIndex currentCall;
+
+    const static QHash<int,QByteArray> rolesDictionary;
 };
 
 static QObject *singletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -60,6 +56,6 @@ static QObject *singletonProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
     Q_UNUSED(engine)
     Q_UNUSED(scriptEngine)
 
-    ContactsViwer *contactsViwer = new ContactsViwer();
-    return contactsViwer;
+    ContactsModel *contactsModel = new ContactsModel(ContactListProvider{});
+    return contactsModel;
 }

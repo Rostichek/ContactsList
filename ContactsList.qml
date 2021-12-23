@@ -6,22 +6,27 @@ ListView {
     id: root
 
     property int entryHeight: 60
-
-    spacing: 2
+    property bool isOnlyFavorites: false
 
     model: ContactsModel
+
+    onIsOnlyFavoritesChanged: {
+        ContactsModel.switchOnlyFavoritesMode()
+    }
 
     delegate: Contact {
         id: contact
 
+        visible: showOnScreen
+
         width: root.width
-        height: root.entryHeight
+        height: visible ? root.entryHeight : 0
 
         name: display.toString()
         color: background.toString();
 
         onCalled: {
-            call = true;
+            callInProgress = true;
         }
     }
 }
