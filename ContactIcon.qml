@@ -1,5 +1,5 @@
 import QtQuick 2.4
-import Qt5Compat.GraphicalEffects
+//import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
@@ -22,9 +22,9 @@ Item {
         source: "pics/cat.jpg"
         fillMode: Image.PreserveAspectCrop
         layer.enabled: true
-        layer.effect: OpacityMask {
-            maskSource: mask
-        }
+//        layer.effect: OpacityMask {
+//            maskSource: mask
+//        }
     }
 
     QtObject {
