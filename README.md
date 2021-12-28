@@ -10,4 +10,4 @@ It's a simple contacts list viewer, created with Qt 6 + QML.
 * chose and filter favorite contacts;
 
 ### in process
-* on `feat` brunch possible realization of the features using Qt 5
+* on branch `feat` a possible implementation of a circle contact list picture using Qt 5
